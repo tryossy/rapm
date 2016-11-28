@@ -53,7 +53,7 @@ https://github.com
 
 【branchの作成とpush】
 
-1. git checkout -b feature で feature　という名前のbranchを作る。Switched to a new branch 'feature'と出れば成功。
+1. git checkout -b feature で feature　という名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
 
 2. 任意のファイルを追加。
 
@@ -65,7 +65,7 @@ git remote add origin git@github.com:username/rapm.git
 
 usernameにはgithubでの自分のアカウント名を入れる。
 
-5. 以下のように現在あるfeature branchをoriginにpushする。
+5. 以下のように現在あるfeatureブランチをリモート（origin）のmasterブランチにpushする。
 
-git push -u origin feature
+git push -u origin feature:master
 
