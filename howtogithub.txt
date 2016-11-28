@@ -65,7 +65,9 @@ git remote add origin git@github.com:username/rapm.git
 
 usernameにはgithubでの自分のアカウント名を入れる。
 
-5. 以下のように現在あるfeatureブランチをリモート（origin）のmasterブランチにpushする。
+5. 以下のようにfeatureブランチをリモート（origin）のfeatureブランチにpushする。
 
-git push -u origin feature:master
+git push -u origin feature
+
+（リモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする）。
 
