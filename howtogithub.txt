@@ -73,6 +73,10 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 11. 別のブランチ（たとえばmaster）の内容を現在作業しているブランチに取り込むにはgit merge masterと入力。
 
+12. 別のブランチ（たとえばmaster）に移る場合はgit chekout masterとすればよい。（-bオプションを付けると新しいブランチが作られるが、付けない場合は単にブランチ間の移動が行われる。
+
+13. ブランチ（たとえばfeature）を取り除くには git branch -d featureとする。
+
 ----------------------------------
 【リモートリポジトリへのpush】
 
@@ -136,9 +140,7 @@ git push -u origin master
 
 1. git fetchでリモートリポジトリの編集履歴をローカルに移してくる。
 
-4. git merge origin/masterでローカルのmasterブランチを（originと名付けた）リモートリポジトリのブランチと一致させる。
-
-5. git merge masterでローカルのmasterブランチの内容を現在の作業ブランチに取り込む。
+2. git merge origin/masterで現在作業しているブランチを（originと名付けた）リモートリポジトリのブランチと一致させる。
 
 競合が発生した場合はその旨表示されるので、自分のファイルの方を修正し、再度git add, git commitを行った上でgit mergeするとよい。
 
