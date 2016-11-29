@@ -1,0 +1,94 @@
+【gitの初期設定】
+
+1. gitが入っていない環境では sudo apt-get install git-allでインストール。（全学計算機システムにはインストール済み）
+
+2. 以下のようにgitのユーザ名とメールアドレスを設定。
+
+git config --global user.name
+git config --global user.email
+
+【ローカルリポジトリの作成】
+
+1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
+
+2. git initでローカルリポジトリ作成。ls -lartで.gitというディレクトリが作られていることを確認。
+
+【githubでのアカウント作成】
+
+1. 以下のページにてアカウントを作成。
+
+https://github.com
+
+【githubと通信するためのssh鍵の登録】
+
+1. ssh鍵を置くディレクトリに cd ~/.ssh で移動。
+
+2. コマンドプロンプトからssh-keygenと入力。
+
+3. Enter file in which to save the keyと聞かれるので、任意のファイル名を指定。たとえばgithub_rsa。Pass phraseを聞かれたら何も入れずにEnter。これによってgithub_rsa（秘密鍵）とgithub_rsa.pub（公開鍵）が作られる。公開鍵は見せてもよいが秘密鍵は自分の所に取っておき、人には見せない。
+
+4. 公開鍵のファイル（拡張子がpubで終わるファイル）の中身をcatで表示。cat ~/.ssh/github_rsa.pubなど。
+
+5. ブラウザで https://github.com/settings/keys を表示し、右上にあるNew SSH keyをクリック。
+
+6. 公開鍵の中身をコピペしてkeyの欄に入力。titleにはアクセス元の環境など、適当な名前を付けた上で、下にあるAdd SSH keyボタンをクリック。
+
+7. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
+
+【新規プロジェクトの作成】
+
+1. githubの自分のアカウントのページから右上の「+」をクリックし、New repositoryを選択。
+
+2. Repository nameを入力し、必要であればDescriptionに記入した上で一番下のCreate repositoryをクリック。
+
+3. 表示されるコードをターミナル上にコピペすれば自分のローカルリポジトリの内容がリモートリポジトリにコピーされる。
+
+【プロジェクトのクローン】
+
+1. 作業用ディレクトリ（git initを行ったディレクトリ）にcdで移動。
+
+2. リモートリポジトリをローカルリポジトリにクローン。git clone git@github.com:tarotez/rapm.git rapm
+
+3. 何か適当なファイルを作る。
+
+4. git statusで現状を見れる。
+
+5. git add . で編集済みファイルをすべてstageする。git add filenameならfilenameのみstageできる。
+
+6. git commit でstageされたファイルをコミットする。
+
+7. git statusで確認。
+
+【branchの作成とリモートリポジトリへのpush】
+
+1. git checkout -b feature で feature　という名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
+
+2. 任意のファイルを追加。
+
+3. git add .とgit commit。
+
+4. 以下のようにoriginにリモートリポジトリを登録する。
+
+git remote add origin git@github.com:username/rapm.git
+
+usernameにはgithubでの自分のアカウント名を入れる。
+
+5. 以下のようにfeatureブランチをリモート（origin）のfeatureブランチにpushする。
+
+git push -u origin feature
+
+（リモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする）。
+
+【pull requestの作成】
+
+1. ブラウザで https://github.com/tarotez/rapm にアクセス。
+
+2. 左端のボタンにあるBranch:masterをBranch:featureに変更。
+
+3. New pull requestボタンをクリック。
+
+4. 
+
+
+
+
