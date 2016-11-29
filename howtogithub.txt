@@ -1,4 +1,4 @@
-【】
+【gitの初期設定】
 
 1. gitが入っていない環境では sudo apt-get install git-allでインストール。（全学計算機システムにはインストール済み）
 
@@ -15,11 +15,11 @@ git config --global user.email
 
 【githubでのアカウント作成】
 
-以下のページにてアカウントを作成。
+1. 以下のページにてアカウントを作成。
 
 https://github.com
 
-【ssh鍵の登録】
+【githubと通信するためのssh鍵の登録】
 
 1. ssh鍵を置くディレクトリに cd ~/.ssh で移動。
 
@@ -34,6 +34,14 @@ https://github.com
 6. 公開鍵の中身をコピペしてkeyの欄に入力。titleにはアクセス元の環境など、適当な名前を付けた上で、下にあるAdd SSH keyボタンをクリック。
 
 7. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
+
+【新規プロジェクトの作成】
+
+1. githubの自分のアカウントのページから右上の「+」をクリックし、New repositoryを選択。
+
+2. Repository nameを入力し、必要であればDescriptionに記入した上で一番下のCreate repositoryをクリック。
+
+3. 表示されるコードをターミナル上にコピペすれば自分のローカルリポジトリの内容がリモートリポジトリにコピーされる。
 
 【プロジェクトのクローン】
 
@@ -51,7 +59,7 @@ https://github.com
 
 7. git statusで確認。
 
-【branchの作成とpush】
+【branchの作成とリモートリポジトリへのpush】
 
 1. git checkout -b feature で feature　という名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
 
@@ -71,3 +79,10 @@ git push -u origin feature
 
 （リモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする）。
 
+【pull requestの作成】
+
+1. ブラウザで https://github.com/tarotez/rapm にアクセス。
+
+2. New pull requestボタンをクリック。
+
+3. 
