@@ -1,4 +1,4 @@
-----------------------------------
+==================================
 【gitの初期設定】
 
 1. gitが入っていない環境では sudo apt-get install git-allでインストール。（全学計算機システムにはインストール済み）
@@ -32,10 +32,11 @@ https://github.com
 
 7. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
 
-----------------------------------
+
+==================================
 【リモートリポジトリのクローン】
 
-1. 新しい作業用ディレクトリを置きたいディレクトリ（たとえばホームディレクトリ）にcdで移動。
+1. 作業用ディレクトリを置くディレクトリ（たとえばホームディレクトリ）にcdで移動。
 
 2. 以下のコマンドでリモートリポジトリからのクローンによってローカルリポジトリを作成する。たとえばrapmという名前のリモートリポジトリをローカルにrapm2という名前でクローンするなら以下。
 
@@ -52,9 +53,9 @@ git checkout -b feature
 
 2. ファイルの編集や追加などを自由に行う。ただし.gitの中身は編集しないこと。
 
-3. git statusで現状を見れる。
+3. git statusでローカルリポジトリ内にあるファイルの編集やコミットの現状を見れる。
 
-4. git graphでコミット履歴が見れる。以下のように設定するとgit graphの出力が見やすくなる。
+4. git graphでこれまでのコミット履歴が見れる。以下のように設定するとgit graphの出力が見やすくなる。
 
 git config --global alias.graph "log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short"
 
@@ -69,32 +70,45 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 git remote add origin git@github.com:tarotez/rapm.git
 
-4. 以下のようにfeatureブランチをリモート（origin）のfeatureブランチにpushする。
+4. 以下のようにローカルのfeatureブランチをリモート（origin）のtaroブランチにpushする。（分かりやすいよう、今回はtaroには自分のアカウント名を入れること）。
+
+git push -u origin feature:taro
+
+あるいはローカルとリモートでブランチ名を共にfeatureという名前にする場合は以下でもよい。
 
 git push -u origin feature
-
-もしリモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする。
 
 ----------------------------------
 【pull requestの作成】
 
-1. ブラウザで https://github.com/tarotez/rapm にアクセス。
+1. ブラウザで https://github.com/tarotez/rapm にアクセスする。
 
-2. 左端のボタンにあるBranch:masterをBranch:featureに変更。
+2. 右端のCompare & pull requestボタンをクリック。
 
-3. New pull requestボタンをクリック。
+3. taroをmasterにマージするのであれば、左上のボタンでbase:masterとcompare:taroになっていることを確認する。
 
-4. 
+4. Writeというフォームにコミットの理由（なぜ編集を行ったか）を入力。何も入れないのも可。
+
+5. 左下のCreate pull requestボタンをクリック。
 
 
-----------------------------------
-【ローカルリポジトリの作成】
+
+==================================
+【ローカルリポジトリの新規作成】
 
 1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
 
 2. cd rapmで作業ディレクトリ内に移動。
 
 3. git initでローカルリポジトリ作成。ls -lartで.gitというディレクトリが作られていることを確認。
+
+4. このディレクトリの中に任意のファイルを作っておいておく。
+
+5. git statusで現状を確認。
+
+6. git add . でstageする。
+
+7. git commitでコミットする。
 
 ----------------------------------
 【GitHub上で新規リポジトリの作成】
@@ -109,9 +123,21 @@ git remote add origin git@github.com:tarotez/rap.git
 git push -u origin master
 
 ----------------------------------
-【fetchとmerge】
+【ローカルへのfetchとmerge】
 
-1.
+1. git fetchでリモートリポジトリの編集履歴をローカルに移してくる。
+
+2. git merge
+で
+をローカルリポジトリの
+
+
+なお、git fetchとgit mergeはgit pullというコマンドで一括して行うこともできる。これを行うことを他の開発者に依頼するのがpull requestである。
+
+----------------------------------
+【リモートリポジトリにおけるmerge】
+
+リモートリポジトリの所有者（owner）と協力者（collaborator）はpull requestを受け取ると、追加されたブランチをmasterにmergeすることができる。
 
 
 
