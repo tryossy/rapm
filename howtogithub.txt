@@ -83,6 +83,8 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 4. 別のブランチ（たとえばmaster）の内容を現在作業しているブランチと一致させる（マージさせる）にはgit merge masterと入力。競合がある場合、その旨表示されるため、修正を行えばマージできる。
 
+12. 別のブランチと現在のブランチで競合が生じた時、git stashによって途中待避できる。
+
 5. 別のブランチ（たとえばmaster）に移る場合はgit chekout masterとすればよい。（-bオプションを付けると新しいブランチが作られるが、付けない場合は単にブランチ間の移動が行われる。
 
 6. ブランチ（たとえばfeature）を取り除くには git branch -d featureとする。
@@ -111,7 +113,7 @@ git push -u origin feature
 
 3. taroをmasterにマージするのであれば、左上のボタンでbase:masterとcompare:taroになっていることを確認する。
 
-4. Writeというフォームにコミットの理由（なぜ編集を行ったか）を入力。何も入れないのも可。
+4. Writeというフォームにコミットの理由（なぜ編集を行ったか）を入力。これはリモートリポジトリの管理者にマージの必要性を訴えるために使える。何も入れないのも可。
 
 5. 左下のCreate pull requestボタンをクリック。
 
