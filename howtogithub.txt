@@ -1,3 +1,4 @@
+----------------------------------
 【gitの初期設定】
 
 1. gitが入っていない環境では sudo apt-get install git-allでインストール。（全学計算機システムにはインストール済み）
@@ -7,19 +8,15 @@
 git config --global user.name
 git config --global user.email
 
-【ローカルリポジトリの作成】
+----------------------------------
+【GitHubでのアカウント作成】
 
-1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
-
-2. git initでローカルリポジトリ作成。ls -lartで.gitというディレクトリが作られていることを確認。
-
-【githubでのアカウント作成】
-
-1. 以下のページにてアカウントを作成。
+1. 以下のページにてアカウントを作成する。
 
 https://github.com
 
-【githubと通信するためのssh鍵の登録】
+----------------------------------
+【GitHubと通信するためのssh鍵の登録】
 
 1. ssh鍵を置くディレクトリに cd ~/.ssh で移動。
 
@@ -35,50 +32,50 @@ https://github.com
 
 7. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
 
-【新規プロジェクトの作成】
+----------------------------------
+【リモートリポジトリのクローン】
 
-1. githubの自分のアカウントのページから右上の「+」をクリックし、New repositoryを選択。
+1. 新しい作業用ディレクトリを置きたいディレクトリ（たとえばホームディレクトリ）にcdで移動。
 
-2. Repository nameを入力し、必要であればDescriptionに記入した上で一番下のCreate repositoryをクリック。
+2. 以下のコマンドでリモートリポジトリからのクローンによってローカルリポジトリを作成する。たとえばrapmという名前のリモートリポジトリをローカルにrapm2という名前でクローンするなら以下。
 
-3. 表示されるコードをターミナル上にコピペすれば自分のローカルリポジトリの内容がリモートリポジトリにコピーされる。
+git clone git@github.com:tarotez/rapm.git rapm2
 
-【プロジェクトのクローン】
+3. cd rapm2 で移動し、ls -lartでファイルや.gitというディレクトリも作られていることを確認する。
 
-1. 作業用ディレクトリ（git initを行ったディレクトリ）にcdで移動。
+----------------------------------
+【ブランチの作成／ファイルの編集】
 
-2. リモートリポジトリをローカルリポジトリにクローン。git clone git@github.com:tarotez/rapm.git rapm
+1. 以下のコマンドでfeatureという名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
 
-3. 何か適当なファイルを作る。
+git checkout -b feature
 
-4. git statusで現状を見れる。
+2. ファイルの編集や追加などを自由に行う。ただし.gitの中身は編集しないこと。
 
-5. git add . で編集済みファイルをすべてstageする。git add filenameならfilenameのみstageできる。
+3. git statusで現状を見れる。
 
-6. git commit でstageされたファイルをコミットする。
+4. git graphでコミット履歴が見れる。以下のように設定するとgit graphの出力が見やすくなる。
 
-7. git statusで確認。
+git config --global alias.graph "log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short"
 
-【branchの作成とリモートリポジトリへのpush】
+----------------------------------
+【リモートリポジトリへのpush】
 
-1. git checkout -b feature で feature　という名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
+1. git add . で編集済みファイルをすべてstageする。（一部のファイルのみをstageしたい場合、git add filenameでfilenameのみstageできる）。
 
-2. 任意のファイルを追加。
+2. git commit でstageされたファイルをコミットする。git statusですべてコミットされていることを確認できる。
 
-3. git add .とgit commit。
+3. 以下のコマンドでリモートリポジトリのoriginにローカルリポジトリと同じものを登録する。
 
-4. 以下のようにoriginにリモートリポジトリを登録する。
+git remote add origin git@github.com:tarotez/rapm.git
 
-git remote add origin git@github.com:username/rapm.git
-
-usernameにはgithubでの自分のアカウント名を入れる。
-
-5. 以下のようにfeatureブランチをリモート（origin）のfeatureブランチにpushする。
+4. 以下のようにfeatureブランチをリモート（origin）のfeatureブランチにpushする。
 
 git push -u origin feature
 
-（リモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする）。
+もしリモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする。
 
+----------------------------------
 【pull requestの作成】
 
 1. ブラウザで https://github.com/tarotez/rapm にアクセス。
@@ -88,6 +85,33 @@ git push -u origin feature
 3. New pull requestボタンをクリック。
 
 4. 
+
+
+----------------------------------
+【ローカルリポジトリの作成】
+
+1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
+
+2. cd rapmで作業ディレクトリ内に移動。
+
+3. git initでローカルリポジトリ作成。ls -lartで.gitというディレクトリが作られていることを確認。
+
+----------------------------------
+【GitHub上で新規リポジトリの作成】
+
+1. githubの自分のアカウントのページから右上の「+」をクリックし、New repositoryを選択。
+
+2. Repository nameを入力し、必要であればDescriptionに記入した上で一番下のCreate repositoryをクリック。
+
+3. 表示される以下のコードをターミナル上にコピペすれば自分のローカルリポジトリの内容がリモートリポジトリにコピーされる。
+
+git remote add origin git@github.com:tarotez/rap.git
+git push -u origin master
+
+----------------------------------
+【fetchとmerge】
+
+1.
 
 
 
