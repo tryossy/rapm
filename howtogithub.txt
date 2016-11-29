@@ -69,11 +69,9 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 git remote add origin git@github.com:tarotez/rapm.git
 
-4. 以下のようにfeatureブランチをリモート（origin）のfeatureブランチにpushする。
+4. 以下のようにfeatureブランチをリモート（origin）のnewfeatureブランチにpushする。
 
-git push -u origin feature
-
-もしリモートのotherというブランチにpushする場合はgit push -u origin feature:otherにする。
+git push -u origin feature:newfeature
 
 ----------------------------------
 【pull requestの作成】
