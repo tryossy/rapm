@@ -1,9 +1,12 @@
 ==================================
+■ gitとGitHubの初期設定 ■
+
+----------------------------------
 【gitの初期設定】
 
-1. gitが入っていない環境では sudo apt-get install git-allでインストール。（全学計算機システムにはインストール済み）
+1. gitが入っていない環境では sudo apt-get install git-all でインストールできる。（全学計算機システムにはインストール済み）
 
-2. 以下のようにgitのユーザ名とメールアドレスを設定。
+2. コマンドライン上で以下のようにgitのユーザ名とメールアドレスを設定。
 
 git config --global user.name
 git config --global user.email
@@ -11,7 +14,7 @@ git config --global user.email
 ----------------------------------
 【GitHubでのアカウント作成】
 
-1. 以下のページにてアカウントを作成する。
+1. 以下のページにてアカウントを作成する。無料アカウントの場合、GitHubにアップロードしたファイルはすべて公開になる。有料アカウントの場合、privateに設定することも可能。
 
 https://github.com
 
@@ -32,8 +35,10 @@ https://github.com
 
 7. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
 
-
 ==================================
+■ 既存のリポジトリを使った作業 ■
+
+----------------------------------
 【リモートリポジトリのクローン】
 
 1. 作業用ディレクトリを置くディレクトリ（たとえばホームディレクトリ）にcdで移動。
@@ -61,24 +66,29 @@ git checkout -b feature
 
 6. git statusでローカルリポジトリ内にあるファイルの編集やコミットの現状を見れる。
 
-7. git graphでこれまでのコミット履歴が見れる。以下のように設定するとgit graphの出力が見やすくなる。
+7. 以下のように設定し、git graphの出力が見やすくさせる。
 
 git config --global alias.graph "log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short"
 
-8. git logで現在までのコミットの一覧が表示される。commitの横に出てくる文字列がコミットハッシュである。
-
-9. たとえばcomhashをコミットハッシュとすると、git show comhashでそのコミットの名前が見れる。コミットハッシュはgit logで表示されたものをコピペすればよい。
-
-10. git diff comhash1 comhash2で2つのコミットの間の差分が表示される。
-
-11. 別のブランチ（たとえばmaster）の内容を現在作業しているブランチに取り込むにはgit merge masterと入力。
-
-12. 別のブランチ（たとえばmaster）に移る場合はgit chekout masterとすればよい。（-bオプションを付けると新しいブランチが作られるが、付けない場合は単にブランチ間の移動が行われる。
-
-13. ブランチ（たとえばfeature）を取り除くには git branch -d featureとする。
+8. git graphでこれまでのコミット履歴を表示させる。何回かファイル編集 → git add . → git commit を繰り返してからgit graphで確認せよ。
 
 ----------------------------------
-【リモートリポジトリへのpush】
+【ブランチ間の比較／移動／取り込み】
+
+1. git logで現在までのコミットの一覧が表示される。commitの横に出てくる文字列がコミットハッシュである。
+
+2. たとえばcomhashをコミットハッシュとすると、git show comhashでそのコミットの名前が見れる。コミットハッシュはgit logで表示されたものをコピペすればよい。
+
+3. git diff comhash1 comhash2で2つのコミットの間の差分が表示される。
+
+4. 別のブランチ（たとえばmaster）の内容を現在作業しているブランチと一致させる（マージさせる）にはgit merge masterと入力。競合がある場合、その旨表示されるため、修正を行えばマージできる。
+
+5. 別のブランチ（たとえばmaster）に移る場合はgit chekout masterとすればよい。（-bオプションを付けると新しいブランチが作られるが、付けない場合は単にブランチ間の移動が行われる。
+
+6. ブランチ（たとえばfeature）を取り除くには git branch -d featureとする。
+
+----------------------------------
+【リモートリポジトリへのプッシュ】
 
 1. 以下のコマンドでリモートリポジトリtarotez/rapm.gitの内容をローカルにコピーし、originという名前を付ける。
 
@@ -93,7 +103,7 @@ git push -u origin feature:taro
 git push -u origin feature
 
 ----------------------------------
-【pull requestの作成】
+【プルリクエストの作成】
 
 1. ブラウザで https://github.com/tarotez/rapm にアクセスする。
 
@@ -107,6 +117,8 @@ git push -u origin feature
 
 
 ==================================
+■ 新規リポジトリを作成しての作業 ■
+
 【ローカルリポジトリの新規作成】
 
 1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
@@ -124,7 +136,7 @@ git push -u origin feature
 7. git commitでコミットする。
 
 ----------------------------------
-【GitHub上で新規リポジトリの作成】
+【GitHub上で新規リモートリポジトリの作成】
 
 1. githubの自分のアカウントのページから右上の「+」をクリックし、New repositoryを選択。
 
@@ -136,20 +148,18 @@ git remote add origin git@github.com:tarotez/rap.git
 git push -u origin master
 
 ----------------------------------
-【ローカルへのfetchとmerge】
+【ローカルリポジトリへのフェッチとマージ】
 
 1. git fetchでリモートリポジトリの編集履歴をローカルに移してくる。
 
-2. git merge origin/masterで現在作業しているブランチを（originと名付けた）リモートリポジトリのブランチと一致させる。
-
-競合が発生した場合はその旨表示されるので、自分のファイルの方を修正し、再度git add, git commitを行った上でgit mergeするとよい。
+2. git merge origin/masterによって現在作業しているブランチを（originと名付けた）ローカルにコピーされたリモートリポジトリのブランチと一致させる。競合が発生した場合はその旨表示されるので、自分のファイルの方を修正し、再度git add, git commitを行った上でgit mergeするとよい。
 
 なお、git fetchとgit mergeはgit pullというコマンドで一括して行うこともできる。これを行うことを他の開発者に依頼するのがpull requestである。
 
 ----------------------------------
-【リモートリポジトリにおけるmerge】
+【リモートリポジトリにおけるマージ】
 
-リモートリポジトリの所有者（owner）と協力者（collaborator）はpull requestを受け取ると、追加されたブランチをmasterにmergeすることができる。
+リモートリポジトリの所有者（owner）と協力者（collaborator）はpull requestを受け取ると、追加されたブランチをmasterブランチにマージできる。
 
 1. Merge pull requestボタンをクリック。
 
