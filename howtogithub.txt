@@ -44,7 +44,7 @@ git clone git@github.com:tarotez/rapm.git rapm2
 3. cd rapm2 で移動し、ls -lartでファイルや.gitというディレクトリも作られていることを確認する。
 
 ----------------------------------
-【ブランチの作成／ファイルの編集】
+【ブランチの作成／ファイルの編集／グラフの表示】
 
 1. 以下のコマンドでfeatureという名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
 
