@@ -20,13 +20,17 @@ git config --global user.name
 ----------------------------------
 【GitHubでのアカウント作成】
 
-# オンラインでバージョン管理を行うGitHubにアカウントを作成する。
+# オンラインでバージョン管理を行うGitHubにアカウントを作成(sighn up)する。
 
 1. 以下のページにてアカウントを作成する。無料アカウントの場合、GitHubにアップロードしたファイルはすべて公開になる。有料アカウントの場合、privateに設定することも可能。
 
 https://github.com
 
-GitHubからメールで送られてくるURLをクリックしてアカウントを認証(verify)する必要があります。
+学生は申請すればprivateを作れる。
+
+https://education.github.com
+
+アカウント作成後、GitHubからメールで送られてくるURLをクリックしてアカウントを認証(verify)する必要がある。
 
 ----------------------------------
 【GitHubと通信するためのssh鍵の登録】
@@ -114,13 +118,15 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 # リモートリポジトリに自分の更新内容を新規ブランチとしてアップロードする。
 
-1. 以下のコマンドでリモートリポジトリtarotez/rapm.gitの内容をローカルにコピーし、originという名前を付ける。
+1. GitHub上でリモートリポジトリをフォークする。すなわちリモートリポジトリのページ（今回はhttps://github.com/tarotez/rapm）の右上にあるForkボタンをクリックする。
 
-git remote add origin git@github.com:tarotez/rapm.git
+2. 以下のコマンドでフォークされたリポジトリmyaccount/rapm.gitの内容をローカルにコピーし、好きな名前（今回はorigin）を付ける。ただしmyaccountには自分のアカウント名が入る。
 
-2. 以下のようにローカルのfeatureブランチをリモート（origin）のtaroブランチにpushする。（分かりやすいよう、今回はtaroには自分のアカウント名を入れること）。
+git remote add origin git@github.com:myaccount/rapm.git
 
-git push -u origin feature:taro
+3. 以下のようにローカルのfeatureブランチをリモート（origin）のbranch nameブランチにpushする。branchnameには自分のアカウント名など、好きな名前を付けてよい。
+
+git push -u origin feature:branchname
 
 あるいはローカルとリモートでブランチ名を共にfeatureという名前にする場合は以下でもよい。
 
@@ -131,11 +137,11 @@ git push -u origin feature
 
 # リモートリポジトリの所有者や他の開発者に自分の更新内容を受け入れてもらう。
 
-1. ブラウザで https://github.com/tarotez/rapm にアクセスする。
+1. ブラウザで https://github.com/myaccount/rapm にアクセスする。（my accountは自分のアカウント名）。
 
 2. 右端のCompare & pull requestボタンをクリック。
 
-3. taroをmasterにマージするのであれば、左上のボタンでbase:masterとcompare:taroになっていることを確認する。
+3. branchnameをmasterにマージするのであれば、左上のボタンでbase:masterとcompare:branchnameになっていることを確認する。
 
 4. Writeというフォームにコミットの理由（なぜ編集を行ったか）を入力。これはリモートリポジトリの管理者にマージの必要性を訴えるために使える。何も入れないのも可。
 
