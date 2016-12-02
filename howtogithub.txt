@@ -8,10 +8,14 @@
 
 1. gitが入っていない環境では sudo apt-get install git-all でインストールできる。（全学計算機システムにはインストール済み）
 
-2. コマンドライン上で以下のようにgitのユーザ名とメールアドレスを設定。
+2. コマンドライン上で以下のようにgitのユーザ名とメールアドレスを設定。たとえばuser.nameをtarotez、user.emailをtez@sings.jpと設定したいなら以下のようにする。
+
+git config --global user.name tarotez
+git config --global user.email tez@sings.jp
+
+設定できていることを確認するのはたとえば以下のように行う。
 
 git config --global user.name
-git config --global user.email
 
 ----------------------------------
 【GitHubでのアカウント作成】
@@ -22,16 +26,20 @@ git config --global user.email
 
 https://github.com
 
+GitHubからメールで送られてくるURLをクリックしてアカウントを認証(verify)する必要があります。
+
 ----------------------------------
 【GitHubと通信するためのssh鍵の登録】
 
 # ssh鍵の作成と登録
 
-1. ssh鍵を置くディレクトリに cd ~/.ssh で移動。
+1. ssh鍵を置くディレクトリに cd ~/.ssh で移動。.sshが見つからないと言われる場合はmkdir ~/.sshで作成する。
 
 2. コマンドプロンプトからssh-keygenと入力。
 
 3. Enter file in which to save the keyと聞かれるので、任意のファイル名を指定。たとえばgithub_rsa。Pass phraseを聞かれたら何も入れずにEnter。これによってgithub_rsa（秘密鍵）とgithub_rsa.pub（公開鍵）が作られる。公開鍵は見せてもよいが秘密鍵は自分の所に取っておき、人には見せない。
+
+4. ssh-addによって鍵の登録を行う。秘密鍵の名前がgithub_rsaの場合、ssh-add github_rsa。
 
 4. 公開鍵のファイル（拡張子がpubで終わるファイル）の中身をcatで表示。cat ~/.ssh/github_rsa.pubなど。
 
@@ -54,6 +62,8 @@ https://github.com
 2. 以下のコマンドでリモートリポジトリからのクローンによってローカルリポジトリを作成する。たとえばrapmという名前のリモートリポジトリをローカルにrapm2という名前でクローンするなら以下。
 
 git clone git@github.com:tarotez/rapm.git rapm2
+
+（もしssh接続がうまく行かない場合は git clone https://github.com/tarotez/rapm.gitのようにhttps経由でクローンする方法もある）
 
 3. cd rapm2 で移動し、ls -lartでファイルや.gitというディレクトリも作られていることを確認する。
 
