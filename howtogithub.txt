@@ -107,7 +107,7 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 1. git logで現在までのコミットの一覧が表示される。commitという文字の横に出てくる文字列がコミットハッシュである。
 
-2. たとえばcomhashをコミットハッシュとすると、git show comhashでそのコミットの名前が見れる。コミットハッシュはgit logで表示されたものをコピペすればよい。
+2. たとえばCOMHASHをコミットハッシュとすると、git show COMHASHでそのコミットの名前が見れる。コミットハッシュはgit logで表示されたものをコピペすればよい。
 
 3. git diff comhash1 comhash2で2つのコミットの間の差分が表示される。
 
@@ -162,13 +162,13 @@ git push -u origin feature
 
 # リモートリポジトリにコピーするためのローカルリポジトリを作成する。
 
-1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
+1. 好きな場所に作業ディレクトリを作る。たとえばmkdir MYPRO。（MYPROには好きな名前をつける）
 
-2. cd rapmで作業ディレクトリ内に移動。
+2. cd MYPROで作業ディレクトリ内に移動。
 
 3. git initでローカルリポジトリ作成。ls -lartで.gitというディレクトリが作られていることを確認。
 
-4. このディレクトリの中に任意のファイルを作っておいておく。
+4. 作業ディレクトリの中に任意のファイルを作っておいておく。.gitの中身はいじらないこと！
 
 5. git statusで現状を確認。
 
@@ -187,7 +187,8 @@ git push -u origin feature
 
 3. 表示される以下のコードをターミナル上にコピペすれば自分のローカルリポジトリの内容がリモートリポジトリにコピーされる。
 
-git remote add origin git@github.com:tarotez/rapm.git
+git remote delete origin
+git remote add origin git@github.com:MYACCOUNT/MYPRO.git
 git push -u origin master
 
 ----------------------------------
@@ -203,7 +204,7 @@ git push -u origin master
 
 git reset --hard origin/master
 
-なお、git fetchとgit mergeはgit pullというコマンドで一括して行うこともできる。これを行うことを他の開発者に依頼するのがpull requestである。
+なお、git fetchとgit merge origin/masterはgit pullというコマンドで一括して行うこともできる。これを行うことを他の開発者に依頼するのがpull requestである。
 
 ----------------------------------
 【リモートリポジトリにおけるマージ】
