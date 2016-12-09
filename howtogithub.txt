@@ -43,15 +43,15 @@ https://education.github.com
 
 3. Enter file in which to save the keyと聞かれるので、任意のファイル名を指定。たとえばgithub_rsa。Pass phraseを聞かれたら何も入れずにEnter。これによってgithub_rsa（秘密鍵）とgithub_rsa.pub（公開鍵）が作られる。公開鍵は見せてもよいが秘密鍵は自分の所に取っておき、人には見せない。
 
-4. ssh-addによって鍵の登録を行う。秘密鍵の名前がgithub_rsaの場合、ssh-add github_rsa。
+4. ssh-addによって鍵の登録を行う。秘密鍵の名前がgithub_rsaの場合、ssh-add ~/.ssh/github_rsa。
 
-4. 公開鍵のファイル（拡張子がpubで終わるファイル）の中身をcatで表示。cat ~/.ssh/github_rsa.pubなど。
+5. 公開鍵のファイル（拡張子がpubで終わるファイル）の中身をcatで表示。cat ~/.ssh/github_rsa.pubなど。
 
-5. ブラウザで https://github.com/settings/keys を表示し、右上にあるNew SSH keyをクリック。
+6. ブラウザで https://github.com/settings/keys を表示し、右上にあるNew SSH keyをクリック。
 
-6. 公開鍵の中身をコピペしてkeyの欄に入力。titleにはアクセス元の環境など、適当な名前を付けた上で、下にあるAdd SSH keyボタンをクリック。
+7. 公開鍵の中身をコピペしてkeyの欄に入力。titleにはアクセス元の環境など、適当な名前を付けた上で、下にあるAdd SSH keyボタンをクリック。
 
-7. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
+8. ターミナルに戻り、ssh git@github.com。これによってYou've successfully authenticated, but GitHub does not provide shell access.と出れば成功。
 
 ==================================
 ■ 既存のリポジトリを使った作業 ■
@@ -76,32 +76,38 @@ git clone git@github.com:tarotez/rapm.git rapm2
 
 # ファイルの作業用バージョンであるブランチを作成し、コミットする。
 
-1. 以下のコマンドでfeatureという名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
+1. git statusと打ち込む。これによって自分が今、masterブランチにいることがわかる。
+
+2. 以下のコマンドでfeatureという名前のブランチを作る。Switched to a new branch 'feature'と出れば成功。
 
 git checkout -b feature
 
-2. git branch と入力すると現在ローカルに存在するブランチの一覧が表示される。*が付いているのが現在作業中のブランチ。また、git statusでも現在の作業ブランチが分かる。
+3. git branch と入力すると現在ローカルに存在するブランチの一覧が表示される。*が付いているのが現在作業中のブランチ。また、git statusでも現在の作業ブランチが分かる。
 
-3. ファイルの編集や追加などを自由に行う。ただし.gitの中身は編集しないこと。
+4. ファイルの編集や追加などを自由に行う。ただし.gitの中身は編集しないこと。
 
-4. git add . で編集済みファイルをすべてステージする。（一部のファイルのみをステージしたい場合、git add filenameでfilenameのみstageできる）。
+5. git add . で編集済みファイルをすべてステージする。（一部のファイルのみをステージしたい場合、git add filenameでfilenameのみstageできる）。
 
-5. git commit でステージされているファイルをコミットする。git statusですべてコミットされていることを確認できる。
+6. git commit でステージされているファイルをコミットする。git statusですべてコミットされていることを確認できる。エディタが立ち上がり、コミットの目的を聞かれるので、入力後、Escキーを押し、:wqを押して保存。それが面倒であれば git commit -m "..."とすることでエディタの起動を避けられる。
 
-6. git status でローカルリポジトリ内にあるファイルの編集やコミットの現状を見れる。
+7. git status でローカルリポジトリ内にあるファイルの編集やコミットの現状を見れる。
 
-7. 以下のように設定し、git graphの出力が見やすくさせる。
+8. 別のブランチ（たとえばmaster）に移る場合はgit chekout masterとすればよい。（-bオプションを付けると新しいブランチが作られるが、付けない場合は単にブランチ間の移動が行われる。
+
+9. いったん編集中のファイルをすべて閉じた上で、git checkout masterでmasterブランチに戻る。そしてさきほど編集したファイルをまた開く。編集したはずの内容が変わっていないことを確認せよ。ふたたびgit checkout featureでfeatureブランチに戻り、編集内容が戻っていることを確認せよ。
+
+10. 以下のように設定し、git logの出力を見やすくさせる。
 
 git config --global alias.graph "log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short"
 
-8. git graphでこれまでのコミット履歴を表示させる。何回かファイル編集 → git add . → git commit を繰り返してからgit graphで確認せよ。
+11. git graphでこれまでのコミット履歴を表示させる。何回かファイル編集 → git add . → git commit を繰り返してからgit graphで確認せよ。
 
 ----------------------------------
 【ブランチ間の比較／ブランチ間の移動／マージ】
 
-1. git logで現在までのコミットの一覧が表示される。commitの横に出てくる文字列がコミットハッシュである。
+1. git logで現在までのコミットの一覧が表示される。commitという文字の横に出てくる文字列がコミットハッシュである。
 
-2. たとえばcomhashをコミットハッシュとすると、git show comhashでそのコミットの名前が見れる。コミットハッシュはgit logで表示されたものをコピペすればよい。
+2. たとえばCOMHASHをコミットハッシュとすると、git show COMHASHでそのコミットの名前が見れる。コミットハッシュはgit logで表示されたものをコピペすればよい。
 
 3. git diff comhash1 comhash2で2つのコミットの間の差分が表示される。
 
@@ -109,9 +115,7 @@ git config --global alias.graph "log --graph --date-order --all --pretty=format:
 
 5. 別のブランチと現在のブランチで競合が生じた時、git stashによって途中待避できる。
 
-6. 別のブランチ（たとえばmaster）に移る場合はgit chekout masterとすればよい。（-bオプションを付けると新しいブランチが作られるが、付けない場合は単にブランチ間の移動が行われる。
-
-7. ブランチ（たとえばfeature）を取り除くには git branch -d featureとする。
+6. ブランチ（たとえばfeature）を取り除くには git branch -d featureとする。
 
 ----------------------------------
 【リモートリポジトリへのプッシュ】
@@ -132,6 +136,8 @@ git push -u origin feature:branchname
 
 git push -u origin feature
 
+もしもローカルリポジトリよりリモートリポジトリが進んでいる場合、プッシュが行えないことがある。この場合はgit pullと打ち込み、ローカルリポジトリをリモートリポジトリに合わせた（更新した）上でgit push -u origin featureを行う。
+
 ----------------------------------
 【プルリクエストの作成】
 
@@ -141,7 +147,7 @@ git push -u origin feature
 
 2. 右端のCompare & pull requestボタンをクリック。
 
-3. branchnameをmasterにマージするのであれば、左上のボタンでbase:masterとcompare:branchnameになっていることを確認する。
+3. branchnameをmasterにマージしてもらいたいのであれば、左上のボタンでbase:masterとcompare:branchnameになっていることを確認する。
 
 4. Writeというフォームにコミットの理由（なぜ編集を行ったか）を入力。これはリモートリポジトリの管理者にマージの必要性を訴えるために使える。何も入れないのも可。
 
@@ -156,13 +162,13 @@ git push -u origin feature
 
 # リモートリポジトリにコピーするためのローカルリポジトリを作成する。
 
-1. 好きな場所に作業ディレクトリを作る。たとえばmkdir rapm。
+1. 好きな場所に作業ディレクトリを作る。たとえばmkdir MYPRO。（MYPROには好きな名前をつける）
 
-2. cd rapmで作業ディレクトリ内に移動。
+2. cd MYPROで作業ディレクトリ内に移動。
 
 3. git initでローカルリポジトリ作成。ls -lartで.gitというディレクトリが作られていることを確認。
 
-4. このディレクトリの中に任意のファイルを作っておいておく。
+4. 作業ディレクトリの中に任意のファイルを作っておいておく。.gitの中身はいじらないこと！
 
 5. git statusで現状を確認。
 
@@ -181,7 +187,8 @@ git push -u origin feature
 
 3. 表示される以下のコードをターミナル上にコピペすれば自分のローカルリポジトリの内容がリモートリポジトリにコピーされる。
 
-git remote add origin git@github.com:tarotez/rap.git
+git remote delete origin
+git remote add origin git@github.com:MYACCOUNT/MYPRO.git
 git push -u origin master
 
 ----------------------------------
@@ -197,7 +204,7 @@ git push -u origin master
 
 git reset --hard origin/master
 
-なお、git fetchとgit mergeはgit pullというコマンドで一括して行うこともできる。これを行うことを他の開発者に依頼するのがpull requestである。
+なお、git fetchとgit merge origin/masterはgit pullというコマンドで一括して行うこともできる。これを行うことを他の開発者に依頼するのがpull requestである。
 
 ----------------------------------
 【リモートリポジトリにおけるマージ】
@@ -209,3 +216,19 @@ git reset --hard origin/master
 2. Confirm mergeボタンをクリック。
 
 3. Delete branchボタンを押して不要なブランチを削除。
+
+----------------------------------
+ 【Issueの利用】
+
+# プロジェクトにおける課題をシェアする機能であるIssueを利用する。
+
+1. GitHub上のプロジェクトのページ（今回はrapm）でIssuesというタブを選択。
+
+2. 右上にある緑色のNew issueボタンをクリック。
+
+3. 課題のタイトルと内容をフォームに記入し、下にある緑色のSubmit new issueボタンをクリック。
+
+4. フォームの右上にある小さなアイコンをクリックすることで、プルリクエストやユーザを各Issueに紐付けることが可能。
+
+5. 右端にあるLabelsでラベル付けが可能。Milestoneで締切の設定が可能。ただしMilestonesはIssuesタブのトップで事前に作成しておく必要がある。Labelsも同様の方法で新しいラベルを追加できる。
+
